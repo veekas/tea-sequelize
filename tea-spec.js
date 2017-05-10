@@ -5,6 +5,7 @@ const expect = chai.expect
 const db = require('./index.js')
 const Tea = db.models.tea
 const { createTeas } = require('./seed')
+// createTeas saves 5 different types of teas to the database
 
 describe('Tea Model', () => {
   beforeEach(() => db.sync({ force: true }))
@@ -41,14 +42,14 @@ describe('Tea Model', () => {
 
   // Sequelize hook - update?
   describe('Hook', () => {
-    it('should decrease the price of all teas every time you add a new one', () =>
+    it('should decrease the price of all teas already in the db every time you add a new one', () =>
       Tea.create({
         name: 'Chai Tea',
         price: 1095,
         description: 'This ancient recipe of black tea spiced with Indian herbs and spices produces a warm, soothing drink that will soothe and satisfy.',
         category: 'black'
       })
-      .then(chai => Tea.findById(1))
+      .then(() => Tea.findById(1))
       .then(earlGrey => {
         expect(earlGrey.price).to.equal(425)
       })
