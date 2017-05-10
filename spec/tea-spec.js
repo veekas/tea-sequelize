@@ -2,9 +2,9 @@
 
 const chai = require('chai')
 const expect = chai.expect
-const db = require('./index.js')
+const db = require('../src/index.js')
 const Tea = db.models.tea
-const { createTeas } = require('./seed')
+const { createTeas } = require('../src/seed')
 // createTeas saves 5 different types of teas to the database
 
 describe('Tea Model', () => {

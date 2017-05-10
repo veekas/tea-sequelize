@@ -1,7 +1,7 @@
 'use strict'
 
 const Sequelize = require('sequelize')
-const db = require('./db')
+const db = require('./_db')
 
 const Tea = db.define('tea', {
   title: Sequelize.STRING,
@@ -9,7 +9,7 @@ const Tea = db.define('tea', {
   price: Sequelize.INTEGER,
   category: Sequelize.ENUM('green', 'black', 'herbal')
 }, {
-  // add more functionality to our model here!
+  // add more functionality to our Tea model here!
 })
 
 module.exports = Tea
