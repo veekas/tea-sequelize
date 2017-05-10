@@ -8,6 +8,8 @@ const Tea = db.define('tea', {
   description: Sequelize.TEXT,
   price: Sequelize.INTEGER,
   category: Sequelize.ENUM('green', 'black', 'herbal')
+}, {
+  // add more functionality to our model here!
 })
 
 module.exports = Tea

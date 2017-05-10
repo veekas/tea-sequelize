@@ -2,7 +2,7 @@
 
 const db = require('./index')
 
-const seedTea = () => db.Promise.map([
+const createTeas = () => db.Promise.map([
 	{
 		title: 'Earl Grey',
 		description: 'British Prime Minister Earl Grey gave his name to this hugely popular tea back in the 1830s, and ever since it has been thought of as a classic English afternoon tea. It is not a type of tea, but a flavour, made up of a simple black tea flavoured with aromatic and stimulating oil of bergamot.',
@@ -33,10 +33,6 @@ const seedTea = () => db.Promise.map([
     price: 595,
     category: 'herbal',
   }
-], tea => db.model('teas').create(tea))
+], tea => db.model('tea').create(tea))
 
-db.sync({force: true})
-.then(seedTea)
-.then(teas => console.log(`Seeded ${teas.length} teas OK`))
-.catch(error => console.error(error))
-.finally(() => db.close())
+module.exports = { createTeas }
