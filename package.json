@@ -1,0 +1,17 @@
+{
+  "name": "sequelize-enrichment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "db.js",
+  "scripts": {
+    "test": "mocha tea-spec.js",
+    "seed": "node seed"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0",
+    "sequelize": "^3.30.4"
+  }
+}
