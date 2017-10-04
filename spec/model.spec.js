@@ -1,15 +1,13 @@
-'use strict'
-
 const chai = require('chai')
 const expect = chai.expect
-const db = require('../src/index.js')
-const Tea = db.models.tea
-const { createTeas } = require('../src/seed')
+const { db, Tea } = require('../models')
+const { createTeas } = require('../models/seed')
 // createTeas saves 5 different types of teas to the database
 
 describe('Tea Model', () => {
-  beforeEach(() => db.sync({ force: true }))
-  beforeEach('Creating test data...', createTeas)
+  before(() => db.sync({ force: true }))
+  before('Creating test data...', createTeas)
+  beforeEach(() => Tea.truncate())
 
   // Sequelize getter for price in dollars: 525 --> $5.25
   describe('Virtual: dollarPrice', () => {
@@ -34,24 +32,23 @@ describe('Tea Model', () => {
 
   // Sequelize instance method to find similar
   describe('Instance Method: findSimilar', () => {
-    it('should find other teas of the same category as the instance', () => Tea.findById(1)
-    .then(earlGrey => earlGrey.findSimilar())
-    .then(similarTeas => expect(similarTeas).to.have.length(1))
+    it('should find other teas of the same category as the instance', () => Tea.findOne({ where: { name: "Earl Grey" } })
+      .then(earlGrey => earlGrey.findSimilar())
+      .then(similarTeas => expect(similarTeas).to.have.length(1))
     )
   })
 
-  // Sequelize hook - update?
   describe('Hook', () => {
-    it('should decrease the price of all teas already in the db every time you add a new one', () =>
+    it('should capitalize the name of the tea', () =>
       Tea.create({
-        name: 'Chai Tea',
+        name: 'chai tea',
         price: 1095,
         description: 'This ancient recipe of black tea spiced with Indian herbs and spices produces a warm, soothing drink that will soothe and satisfy.',
         category: 'black'
       })
       .then(() => Tea.findById(1))
-      .then(earlGrey => {
-        expect(earlGrey.price).to.equal(425)
+      .then(newTea => {
+        expect(newTea.name).to.equal("Chai Tea")
       })
     )
   })

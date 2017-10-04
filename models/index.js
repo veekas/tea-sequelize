@@ -1,7 +1,8 @@
 'use strict'
 
-const Sequelize = require('sequelize')
-const db = require('./_db')
+const Sequelize = require('sequelize');
+
+const db = new Sequelize('postgres://localhost/teas', { logging: false });
 
 const Tea = db.define('tea', {
   title: Sequelize.STRING,
@@ -12,4 +13,4 @@ const Tea = db.define('tea', {
   // add more functionality to our Tea model here!
 })
 
-module.exports = Tea
+module.exports = { db, Tea };
