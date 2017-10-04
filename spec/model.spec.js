@@ -9,7 +9,6 @@ describe('Tea Model', () => {
   before('Creating test data...', createTeas)
   beforeEach(() => Tea.truncate())
 
-  // Sequelize getter for price in dollars: 525 --> $5.25
   describe('Virtual: dollarPrice', () => {
     it('returns the price of the tea as a formatted string', () => {
       const tea = Tea.build({
@@ -20,7 +19,6 @@ describe('Tea Model', () => {
     })
   })
 
-  // Class method: Tea.findByCategory('black')
   describe('Class Method: findByCategory', () => {
     it('should find all teas in a given category', () =>
       Tea.findByCategory('black')
@@ -30,7 +28,6 @@ describe('Tea Model', () => {
     )
   })
 
-  // Sequelize instance method to find similar
   describe('Instance Method: findSimilar', () => {
     it('should find other teas of the same category as the instance', () => Tea.findOne({ where: { name: "Earl Grey" } })
       .then(earlGrey => earlGrey.findSimilar())
