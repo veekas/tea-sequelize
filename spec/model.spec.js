@@ -29,23 +29,23 @@ describe('Tea Model', () => {
   })
 
   describe('Instance Method: findSimilar', () => {
-    it('should find other teas of the same category as the instance', () => Tea.findOne({ where: { name: "Earl Grey" } })
+    it('should find other teas of the same category as the instance', () => Tea.findOne({ where: { title: "Earl Grey" } })
       .then(earlGrey => earlGrey.findSimilar())
       .then(similarTeas => expect(similarTeas).to.have.length(1))
     )
   })
 
   describe('Hook', () => {
-    it('should capitalize the name of the tea', () =>
+    it('should capitalize the title of the tea before it\'s saved', () =>
       Tea.create({
-        name: 'chai tea',
+        title: 'chai tea',
         price: 1095,
         description: 'This ancient recipe of black tea spiced with Indian herbs and spices produces a warm, soothing drink that will soothe and satisfy.',
         category: 'black'
       })
       .then(() => Tea.findById(1))
       .then(newTea => {
-        expect(newTea.name).to.equal("Chai Tea")
+        expect(newTea.title).to.equal("Chai Tea")
       })
     )
   })
