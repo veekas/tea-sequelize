@@ -7,7 +7,6 @@ const { createTeas } = require('../models/seed')
 describe('Tea Model', () => {
   before(() => db.sync({ force: true }))
   before('Creating test data...', createTeas)
-  beforeEach(() => Tea.truncate())
 
   describe('Virtual: dollarPrice', () => {
     it('returns the price of the tea as a formatted string', () => {
