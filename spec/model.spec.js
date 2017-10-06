@@ -35,14 +35,13 @@ describe('Tea Model', () => {
   })
 
   describe('Hook', () => {
-    it('should capitalize the title of the tea before it\'s saved', () =>
+    it('should capitalize the title of the tea before it\'s created', () =>
       Tea.create({
         title: 'chai tea',
         price: 1095,
         description: 'This ancient recipe of black tea spiced with Indian herbs and spices produces a warm, soothing drink that will soothe and satisfy.',
         category: 'black'
       })
-      .then(() => Tea.findById(1))
       .then(newTea => {
         expect(newTea.title).to.equal("Chai Tea")
       })
