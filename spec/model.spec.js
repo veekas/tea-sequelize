@@ -1,38 +1,38 @@
-const chai = require('chai')
-const expect = chai.expect
-const { db, Tea } = require('../models')
-const { createTeas } = require('../models/seed')
+const chai = require('chai');
+const expect = chai.expect;
+const { db, Tea } = require('../models');
+const { createTeas } = require('../models/seed');
 // createTeas saves 5 different types of teas to the database
 
 describe('Tea Model', () => {
-  before(() => db.sync({ force: true }))
-  before('Creating test data...', createTeas)
+  before(() => db.sync({ force: true }));
+  before('Creating test data...', createTeas);
 
   describe('Virtual: dollarPrice', () => {
     it('returns the price of the tea as a formatted string', () => {
       const tea = Tea.build({
         price: 500
-      })
+      });
 
-      expect(tea.dollarPrice).to.equal('$5.00')
-    })
-  })
+      expect(tea.dollarPrice).to.equal('$5.00');
+    });
+  });
 
   describe('Class Method: findByCategory', () => {
     it('should find all teas in a given category', () =>
       Tea.findByCategory('black')
       .then(teas => {
-        expect(teas).to.have.length(2)
+        expect(teas).to.have.length(2);
       })
-    )
-  })
+    );
+  });
 
   describe('Instance Method: findSimilar', () => {
-    it('should find other teas of the same category as the instance', () => Tea.findOne({ where: { title: "Earl Grey" } })
+    it('should find other teas of the same category as the instance', () => Tea.findOne({ where: { title: 'Earl Grey' } })
       .then(earlGrey => earlGrey.findSimilar())
       .then(similarTeas => expect(similarTeas).to.have.length(1))
-    )
-  })
+    );
+  });
 
   describe('Hook', () => {
     it('should capitalize the title of the tea before it\'s created', () =>
@@ -43,8 +43,8 @@ describe('Tea Model', () => {
         category: 'black'
       })
       .then(newTea => {
-        expect(newTea.title).to.equal("Chai Tea")
+        expect(newTea.title).to.equal('Chai Tea');
       })
-    )
-  })
-})
+    );
+  });
+});

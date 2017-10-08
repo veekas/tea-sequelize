@@ -1,4 +1,4 @@
-const { db, Tea } = require('./index')
+const { db, Tea } = require('./index');
 
 const createTeas = () => db.Promise.map([
 	{
@@ -35,4 +35,4 @@ const createTeas = () => db.Promise.map([
 .then(teas => console.log(`${teas.length} teas created!`))
 .catch(err => console.log(`Something went wrong while creating teas: ${err}`));
 
-module.exports = { createTeas }
+module.exports = { createTeas };
